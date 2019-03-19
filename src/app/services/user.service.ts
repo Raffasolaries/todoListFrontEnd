@@ -17,14 +17,27 @@ export class UserService {
     private http: HttpClient
   ) { }
 
-  auth(authform): Observable<Users> {
+  auth(authForm): Observable<Users> {
     return this.http.post<Users>(this.env.apiUsersAuth, {
-      username: authform.value.username,
-      password: authform.value.password
+      username: authForm.value.username,
+      password: authForm.value.password
     })
     .pipe(
       // tap(_ => console.log(`fetched users page=${page}`)),
-      catchError(this.handleError<Users>(`user auth=${authform.value}`))
+      catchError(this.handleError<Users>(`user auth=${authForm.value}`))
+    );
+  }
+
+  register(registerForm): Observable<Users> {
+    return this.http.put<Users>(this.env.apiUserRegister, {
+      usernamme: registerForm.value.username,
+      password: registerForm.value.password,
+      firstName: registerForm.value.firstName,
+      lastName: registerForm.value.lastName
+    })
+    .pipe(
+      // tap(_ => console.log(`fetched users page=${page}`)),
+      catchError(this.handleError<Users>(`user auth=${registerForm.value}`))
     );
   }
 
