@@ -4,8 +4,8 @@ import { Observable } from 'rxjs';
 import { of as observableOf } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
-import { environment } from '../environments/environment';
-import { Users } from './users';
+import { environment } from '../../environments/environment';
+import { Users } from '../users';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +23,10 @@ export class UserService {
       password: authForm.value.password
     })
     .pipe(
+      tap(res => {
+        localStorage.setItem('access_token', res.access_token);
+        localStorage.setItem('id', res._id);
+      }),
       // tap(_ => console.log(`fetched users page=${page}`)),
       catchError(this.handleError<Users>(`user auth=${authForm.value}`))
     );
@@ -39,6 +43,14 @@ export class UserService {
       // tap(_ => console.log(`fetched users page=${page}`)),
       catchError(this.handleError<Users>(`user auth=${registerForm.value}`))
     );
+  }
+
+  logout() {
+    localStorage.removeItem('access_token');
+  }
+
+  public get loggedIn(): boolean {
+    return localStorage.getItem('access_token') !==  null;
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

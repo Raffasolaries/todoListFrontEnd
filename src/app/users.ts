@@ -6,4 +6,6 @@ export class Users {
     username: string;
     password: string;
     createdDate?: Date;
+    access_token?: string;
+    _id?: string;
 }
