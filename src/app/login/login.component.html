@@ -4,14 +4,24 @@
 <mat-card class="my-card">
   <mat-card-content>
     <form class="my-form" [formGroup]="loginForm">
-        <mat-form-field class="full-width">
-          <mat-label>Username</mat-label>
-          <input  matInput  placeholder="Username" name="username" formControlName="username">
-        </mat-form-field>
-        <mat-form-field class="full-width">
-          <mat-label>Password</mat-label>
-          <input  matInput  placeholder="Password" name="password" formControlName="password">
-        </mat-form-field>
+        <table>
+          <tr>
+            <td>
+              <mat-form-field class="full-width">
+                <mat-label>Username</mat-label>
+                <input  matInput  placeholder="Username" name="username" formControlName="username">
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <mat-form-field class="full-width">
+                <mat-label>Password</mat-label>
+                <input  matInput  placeholder="Password" name="password" formControlName="password">
+              </mat-form-field>
+            </td>
+          </tr>
+        </table>
     </form>
   </mat-card-content>
   <mat-card-actions>

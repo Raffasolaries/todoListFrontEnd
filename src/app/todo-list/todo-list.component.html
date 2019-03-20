@@ -1,0 +1,41 @@
+<div style="margin: 0 8px 0 8px">
+
+  <h1>Todos</h1>
+  <div class="inputNewNote">
+    <mat-form-field>
+      <mat-label>What needs to be done?</mat-label>
+      <input matInput placeholder="What needs to be done?" [(ngModel)]="newTodo.title" (keyup.enter)="addTodo()">
+    </mat-form-field>
+  </div>
+
+  <div class="main" *ngIf="todos">
+    <mat-card *ngFor="let todo of todos" style="margin: 0 0 5px 0">
+      <!-- <mat-card-title>
+        <strong>{{ todo.title }}</strong>
+      </mat-card-title> -->
+      <mat-card-content>
+        <table>
+          <tr>
+            <td>
+              <h3><strong>{{ todo.title }}</strong></h3>
+            </td>
+            <td class="alignright">
+              <div>
+                <mat-checkbox [(ngModel)]="todo.completed" (click)="toggleTodoComplete(todo)">Done</mat-checkbox>
+                <!-- <button mat-icon-button (click)="toggleTodoComplete(todo)">
+                  <mat-icon>done</mat-icon>
+                </button> -->
+                <button mat-icon-button (click)="removeTodo(todo)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <footer class="footer" *ngIf="todos">
+    <span class="todo-count"><strong>{{todos.length}}</strong> {{todos.length == 1 ? 'item' : 'items'}} left</span>
+  </footer>
+</div>

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpErrorResponse, } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { of as observableOf } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, map, tap, shareReplay } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
 import { Users } from '../users';
@@ -24,8 +24,9 @@ export class UserService {
     })
     .pipe(
       tap(res => {
-        localStorage.setItem('access_token', res.access_token);
-        localStorage.setItem('id', res._id);
+        console.log('access_token', res.token, 'user_id', res._id);
+        localStorage.setItem('access_token', res.token);
+        localStorage.setItem('user_id', res._id);
       }),
       // tap(_ => console.log(`fetched users page=${page}`)),
       catchError(this.handleError<Users>(`user auth=${authForm.value}`))

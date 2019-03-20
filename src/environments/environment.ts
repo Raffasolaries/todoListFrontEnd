@@ -5,6 +5,7 @@ const api = 'http://localhost:3000';
 
 export const environment = {
   production: false,
+  apiTasks: api + '/tasks',
   apiUserRegister: api + '/users/register',
   apiUsersGetAll: api + '/users',
   apiUsersAuth: api + '/users/authenticate',

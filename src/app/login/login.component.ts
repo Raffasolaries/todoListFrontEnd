@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { UserService } from '../services/user.service';
@@ -13,6 +14,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
   constructor(
+    private router: Router,
     private userApi: UserService,
     private fb: FormBuilder
   ) { }
@@ -27,7 +29,10 @@ export class LoginComponent implements OnInit {
   login() {
     this.userApi.auth(this.loginForm)
       .subscribe(
-        res => console.log('success: ', res),
+        res => {
+          console.log('success: ', res);
+          this.router.navigate(['/todo']);
+        },
         err => console.log('error: ', err)
       );
   }

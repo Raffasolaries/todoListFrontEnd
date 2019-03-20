@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import {
   MatNativeDateModule, MatDatepickerModule, MatIconModule, MatButtonModule, MatCheckboxModule,
   MatToolbarModule, MatCardModule, MatFormFieldModule, MatInputModule, MatRadioModule, 
-  MatListModule 
+  MatListModule
 } from  '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 

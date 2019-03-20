@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,12 +11,16 @@ import { MaterialModule } from './material/material.module';
 import { RegistrationComponent } from './registration/registration.component';
 import { LoginComponent } from './login/login.component';
 import { UserService } from './services/user.service';
+import { TodoService } from './services/todo.service';
+import { TodoListComponent } from './todo-list/todo-list.component';
+import { TokenInterceptor } from './services/interceptor';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegistrationComponent,
-    LoginComponent
+    LoginComponent,
+    TodoListComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +39,10 @@ import { UserService } from './services/user.service';
       }
     })
   ],
-  providers: [UserService],
+  providers: [ 
+    UserService, TodoService,
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
