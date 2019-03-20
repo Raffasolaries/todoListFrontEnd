@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { UserService } from '../services/user.service';
@@ -12,15 +11,13 @@ import { UserService } from '../services/user.service';
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
-  userApi: UserService;
 
   constructor(
-    private fb: FormBuilder,
-    private http: HttpClient
+    private userApi: UserService,
+    private fb: FormBuilder
   ) { }
 
   ngOnInit() {
-    this.userApi = new UserService(this.http);
     this.loginForm = this.fb.group({
       username: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required)
